@@ -4,11 +4,13 @@ import 'package:flutter/material.dart';
 /// Todoアイテム
 class Todo extends StatelessWidget {
   final String todo;
+  final String executionDate;
   final bool done;
 
   const Todo({
     super.key,
     required this.todo,
+    required this.executionDate,
     required this.done,
   });
 
@@ -22,6 +24,10 @@ class Todo extends StatelessWidget {
         onChanged: (value) => (){},
         value: done,
         title: Text(todo),
+        subtitle: Text(
+          executionDate,
+          style: const TextStyle(color: AppColors.green),
+          ),
         controlAffinity: ListTileControlAffinity.leading, // チェックボックスを左に配置
       ),
     );
