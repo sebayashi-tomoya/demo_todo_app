@@ -25,13 +25,18 @@ class TodosNotifier extends _$TodosNotifier {
     ];
   }
 
-  // データを変更する関数
-  void updateState(TodoItem model) {
-    // 変更前のデータ
+  /// Todoの追加
+  void addState(TodoItem model) {
     final oldState = state;
-    // 変更後のデータ
     final newState = [...oldState, model];
-    // データを上書き
+    state = newState;
+  }
+
+  /// Todoの更新
+  void updateState(List<TodoItem> models) {
+    // stateに直接代入ではUIに変更されないため新規のインスタンスを作成
+    var newState = List<TodoItem>.from(state);
+    newState = models;
     state = newState;
   }
 }

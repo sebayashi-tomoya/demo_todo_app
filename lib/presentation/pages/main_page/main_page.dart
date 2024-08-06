@@ -1,11 +1,9 @@
-import 'package:demo_todo_app/application/state/todos_notifier.dart';
 import 'package:demo_todo_app/application/usecases/todo_group_usecase.dart';
-import 'package:demo_todo_app/application/usecases/todo_usecase.dart';
-import 'package:demo_todo_app/domain/types/todoItem.dart';
 import 'package:demo_todo_app/presentation/pages/add_todo_bottom_sheet.dart';
 import 'package:demo_todo_app/presentation/pages/main_page/todo_list.dart';
 import 'package:demo_todo_app/presentation/pages/side_menu.dart';
 import 'package:demo_todo_app/presentation/theme/app_size.dart';
+import 'package:demo_todo_app/presentation/widgets/delete_button.dart';
 import 'package:demo_todo_app/presentation/widgets/search_button.dart';
 import 'package:demo_todo_app/presentation/widgets/settings_button.dart';
 import 'package:demo_todo_app/presentation/widgets/todo_edit.dart';
@@ -97,14 +95,7 @@ class MainPage extends ConsumerWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             // ゴミ箱ボタン
-            FloatingActionButton(
-              onPressed: () {},
-              backgroundColor: AppColors.white,
-              child: const Icon(
-                Icons.delete,
-                color: AppColors.main,
-              ),
-            ),
+            const DeleteButton(),
         
             // 追加ボタン
             FloatingActionButton(

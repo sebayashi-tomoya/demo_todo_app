@@ -7,9 +7,13 @@ class InputTodoText extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final text = ref.watch(inputTextNotifierProvider);
+    final TextEditingController controller = TextEditingController();
+    void clearAll() {
+      controller.clear();
+    }
 
     return TextField(
+      controller: controller,
       onChanged: (value){
         final notifier = ref.read(inputTextNotifierProvider.notifier);
         notifier.updateState(value);
