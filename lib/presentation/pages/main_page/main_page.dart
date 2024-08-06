@@ -1,8 +1,8 @@
 import 'package:demo_todo_app/application/usecases/todo_group_usecase.dart';
-import 'package:demo_todo_app/presentation/pages/add_todo_bottom_sheet.dart';
 import 'package:demo_todo_app/presentation/pages/main_page/todo_list.dart';
 import 'package:demo_todo_app/presentation/pages/side_menu.dart';
 import 'package:demo_todo_app/presentation/theme/app_size.dart';
+import 'package:demo_todo_app/presentation/widgets/add_button.dart';
 import 'package:demo_todo_app/presentation/widgets/delete_button.dart';
 import 'package:demo_todo_app/presentation/widgets/search_button.dart';
 import 'package:demo_todo_app/presentation/widgets/settings_button.dart';
@@ -34,11 +34,11 @@ class MainPage extends ConsumerWidget {
       // 画面上部
       drawer: const SideMenu(),
       appBar:AppBar(
+        backgroundColor: AppColors.main,
         actions: const [
           SerchButton(),
           SettingsButton(),
         ],
-        backgroundColor: AppColors.main,
       ),
 
       // 画面中部
@@ -88,31 +88,16 @@ class MainPage extends ConsumerWidget {
       
       // 画面下部ボタン（スワイプ時も固定）
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-      floatingActionButton: Padding(
+      floatingActionButton: const Padding(
         // 左右にpadding
-        padding: const EdgeInsets.symmetric(horizontal: 10),
+        padding: EdgeInsets.symmetric(horizontal: 10),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             // ゴミ箱ボタン
-            const DeleteButton(),
-        
+            DeleteButton(),
             // 追加ボタン
-            FloatingActionButton(
-              onPressed: () {
-                showModalBottomSheet(
-                  context: context,
-                  builder: (BuildContext context){
-                    return const AddTodoBottomSheet();
-                  },
-                );
-              },
-              backgroundColor: AppColors.main,
-              child: const Icon(
-                Icons.add,
-                color: AppColors.white,
-              ),
-            ),
+            AddButton(),
           ],
         ),
       ),
