@@ -37,7 +37,7 @@ class Todo extends ConsumerWidget {
       todosNotifire.updateState(newState);
     }
 
-    // Todo単一のウィジェット
+    // Todo単一のリストタイル
     final listTIle = CheckboxListTile(
       onChanged: (newValue) => onChangedCheck(newValue),
       value: model.done,
@@ -49,6 +49,7 @@ class Todo extends ConsumerWidget {
       controlAffinity: ListTileControlAffinity.leading, // チェックボックスを左に配置
     );
 
+    // Containerで成形
     return Container(
       decoration: boxdecoration,
       child: listTIle,
