@@ -16,10 +16,23 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$TodoItem {
-// やること
-  String get todo => throw _privateConstructorUsedError; // 日付
-  DateTime get executionDate => throw _privateConstructorUsedError; // 実行済みかどうか
+// ID
+  String get id => throw _privateConstructorUsedError;
+
+  /// やること
+  String get title => throw _privateConstructorUsedError;
+
+  /// 実行日
+  DateTime? get executionDate => throw _privateConstructorUsedError;
+
+  /// 実行済みかどうか
   bool get done => throw _privateConstructorUsedError;
+
+  /// 削除済みかどうか
+  bool get isDeleted => throw _privateConstructorUsedError;
+
+  /// 更新日時
+  DateTime get updated => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $TodoItemCopyWith<TodoItem> get copyWith =>
@@ -31,7 +44,13 @@ abstract class $TodoItemCopyWith<$Res> {
   factory $TodoItemCopyWith(TodoItem value, $Res Function(TodoItem) then) =
       _$TodoItemCopyWithImpl<$Res, TodoItem>;
   @useResult
-  $Res call({String todo, DateTime executionDate, bool done});
+  $Res call(
+      {String id,
+      String title,
+      DateTime? executionDate,
+      bool done,
+      bool isDeleted,
+      DateTime updated});
 }
 
 /// @nodoc
@@ -47,23 +66,38 @@ class _$TodoItemCopyWithImpl<$Res, $Val extends TodoItem>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? todo = null,
-    Object? executionDate = null,
+    Object? id = null,
+    Object? title = null,
+    Object? executionDate = freezed,
     Object? done = null,
+    Object? isDeleted = null,
+    Object? updated = null,
   }) {
     return _then(_value.copyWith(
-      todo: null == todo
-          ? _value.todo
-          : todo // ignore: cast_nullable_to_non_nullable
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
               as String,
-      executionDate: null == executionDate
+      title: null == title
+          ? _value.title
+          : title // ignore: cast_nullable_to_non_nullable
+              as String,
+      executionDate: freezed == executionDate
           ? _value.executionDate
           : executionDate // ignore: cast_nullable_to_non_nullable
-              as DateTime,
+              as DateTime?,
       done: null == done
           ? _value.done
           : done // ignore: cast_nullable_to_non_nullable
               as bool,
+      isDeleted: null == isDeleted
+          ? _value.isDeleted
+          : isDeleted // ignore: cast_nullable_to_non_nullable
+              as bool,
+      updated: null == updated
+          ? _value.updated
+          : updated // ignore: cast_nullable_to_non_nullable
+              as DateTime,
     ) as $Val);
   }
 }
@@ -76,7 +110,13 @@ abstract class _$$TodoItemImplCopyWith<$Res>
       __$$TodoItemImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String todo, DateTime executionDate, bool done});
+  $Res call(
+      {String id,
+      String title,
+      DateTime? executionDate,
+      bool done,
+      bool isDeleted,
+      DateTime updated});
 }
 
 /// @nodoc
@@ -90,23 +130,38 @@ class __$$TodoItemImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? todo = null,
-    Object? executionDate = null,
+    Object? id = null,
+    Object? title = null,
+    Object? executionDate = freezed,
     Object? done = null,
+    Object? isDeleted = null,
+    Object? updated = null,
   }) {
     return _then(_$TodoItemImpl(
-      todo: null == todo
-          ? _value.todo
-          : todo // ignore: cast_nullable_to_non_nullable
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
               as String,
-      executionDate: null == executionDate
+      title: null == title
+          ? _value.title
+          : title // ignore: cast_nullable_to_non_nullable
+              as String,
+      executionDate: freezed == executionDate
           ? _value.executionDate
           : executionDate // ignore: cast_nullable_to_non_nullable
-              as DateTime,
+              as DateTime?,
       done: null == done
           ? _value.done
           : done // ignore: cast_nullable_to_non_nullable
               as bool,
+      isDeleted: null == isDeleted
+          ? _value.isDeleted
+          : isDeleted // ignore: cast_nullable_to_non_nullable
+              as bool,
+      updated: null == updated
+          ? _value.updated
+          : updated // ignore: cast_nullable_to_non_nullable
+              as DateTime,
     ));
   }
 }
@@ -115,21 +170,40 @@ class __$$TodoItemImplCopyWithImpl<$Res>
 
 class _$TodoItemImpl implements _TodoItem {
   const _$TodoItemImpl(
-      {required this.todo, required this.executionDate, required this.done});
+      {required this.id,
+      required this.title,
+      required this.executionDate,
+      required this.done,
+      required this.isDeleted,
+      required this.updated});
 
-// やること
+// ID
   @override
-  final String todo;
-// 日付
+  final String id;
+
+  /// やること
   @override
-  final DateTime executionDate;
-// 実行済みかどうか
+  final String title;
+
+  /// 実行日
+  @override
+  final DateTime? executionDate;
+
+  /// 実行済みかどうか
   @override
   final bool done;
 
+  /// 削除済みかどうか
+  @override
+  final bool isDeleted;
+
+  /// 更新日時
+  @override
+  final DateTime updated;
+
   @override
   String toString() {
-    return 'TodoItem(todo: $todo, executionDate: $executionDate, done: $done)';
+    return 'TodoItem(id: $id, title: $title, executionDate: $executionDate, done: $done, isDeleted: $isDeleted, updated: $updated)';
   }
 
   @override
@@ -137,14 +211,19 @@ class _$TodoItemImpl implements _TodoItem {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$TodoItemImpl &&
-            (identical(other.todo, todo) || other.todo == todo) &&
+            (identical(other.id, id) || other.id == id) &&
+            (identical(other.title, title) || other.title == title) &&
             (identical(other.executionDate, executionDate) ||
                 other.executionDate == executionDate) &&
-            (identical(other.done, done) || other.done == done));
+            (identical(other.done, done) || other.done == done) &&
+            (identical(other.isDeleted, isDeleted) ||
+                other.isDeleted == isDeleted) &&
+            (identical(other.updated, updated) || other.updated == updated));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, todo, executionDate, done);
+  int get hashCode => Object.hash(
+      runtimeType, id, title, executionDate, done, isDeleted, updated);
 
   @JsonKey(ignore: true)
   @override
@@ -155,16 +234,35 @@ class _$TodoItemImpl implements _TodoItem {
 
 abstract class _TodoItem implements TodoItem {
   const factory _TodoItem(
-      {required final String todo,
-      required final DateTime executionDate,
-      required final bool done}) = _$TodoItemImpl;
+      {required final String id,
+      required final String title,
+      required final DateTime? executionDate,
+      required final bool done,
+      required final bool isDeleted,
+      required final DateTime updated}) = _$TodoItemImpl;
 
-  @override // やること
-  String get todo;
-  @override // 日付
-  DateTime get executionDate;
-  @override // 実行済みかどうか
+  @override // ID
+  String get id;
+  @override
+
+  /// やること
+  String get title;
+  @override
+
+  /// 実行日
+  DateTime? get executionDate;
+  @override
+
+  /// 実行済みかどうか
   bool get done;
+  @override
+
+  /// 削除済みかどうか
+  bool get isDeleted;
+  @override
+
+  /// 更新日時
+  DateTime get updated;
   @override
   @JsonKey(ignore: true)
   _$$TodoItemImplCopyWith<_$TodoItemImpl> get copyWith =>

@@ -1,24 +1,25 @@
+import 'package:demo_todo_app/application/di/usecases.dart';
 import 'package:demo_todo_app/application/state/todos_notifier.dart';
-import 'package:demo_todo_app/application/usecases/todo_usecase.dart';
-import 'package:demo_todo_app/domain/types/todoItem.dart';
+import 'package:demo_todo_app/domain/features/datetime_formatter.dart';
 import 'package:demo_todo_app/presentation/theme/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 /// Todoアイテム
 class Todo extends ConsumerWidget {
-  final TodoItem model;
-  final int index;
+  // Todo識別用のid
+  final String id;
 
   const Todo({
     super.key,
-    required this.model,
-    required this.index
+    required this.id
   });
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    DatetimeFormatter datetimeFormatter = DatetimeFormatter();
     final todos = ref.watch(todosNotifierProvider);
+    final currentItem = todos.firstWhere((element) => element.id == id);
 
     // Containerのスタイル
     final boxdecoration =  BoxDecoration(
@@ -29,21 +30,17 @@ class Todo extends ConsumerWidget {
     void onChangedCheck(bool? newValue) {
       if (newValue == null) return;
 
-      final newModel = TodoUsecase.toModel(model.todo, model.executionDate, newValue);
-      final newState = List<TodoItem>.from(todos);
-      newState[index] = newModel;
-
-      final todosNotifire = ref.read(todosNotifierProvider.notifier);
-      todosNotifire.updateState(newState);
+      final usecase = ref.read(updateTodoProvider);
+      usecase.updateTodo(currentItem.copyWith(done: newValue));
     }
 
     // Todo単一のリストタイル
     final listTIle = CheckboxListTile(
       onChanged: (newValue) => onChangedCheck(newValue),
-      value: model.done,
-      title: Text(model.todo),
+      value: currentItem.done,
+      title: Text(currentItem.title),
       subtitle: Text(
-        TodoUsecase.dateTimeToString(model.executionDate),
+        datetimeFormatter.forUI(currentItem.executionDate), 
         style: const TextStyle(color: AppColors.green),
       ),
       controlAffinity: ListTileControlAffinity.leading, // チェックボックスを左に配置

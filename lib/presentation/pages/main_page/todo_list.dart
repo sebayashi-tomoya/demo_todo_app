@@ -17,12 +17,13 @@ class TodoList extends ConsumerWidget {
     );
 
     List<Todo> toWidget(){
-      var result = <Todo>[];
-      for(int i = 0; i < todos.length; i++){
-        result.add(Todo(model: todos[i], index: i));
+      var resultList = <Todo>[];
+      for(final item in todos){
+        if (item.isDeleted == false){
+          resultList.add(Todo(id: item.id)); 
+        }
       }
-
-      return result;
+      return resultList;
     }
 
     final todoList = toWidget();

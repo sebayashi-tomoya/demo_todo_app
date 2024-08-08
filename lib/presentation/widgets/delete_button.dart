@@ -1,5 +1,5 @@
+import 'package:demo_todo_app/application/di/usecases.dart';
 import 'package:demo_todo_app/application/state/todos_notifier.dart';
-import 'package:demo_todo_app/domain/types/todoItem.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../theme/app_colors.dart';
@@ -17,10 +17,12 @@ class DeleteButton extends ConsumerWidget {
     );
 
     void onPressed() {
-      final newState = List<TodoItem>.from(todos);
-      newState.removeWhere((element) => element.done == true);
-      final notifier = ref.read(todosNotifierProvider.notifier);
-      notifier.updateState(newState);
+      final usecase = ref.read(updateTodoProvider);
+      for (final item in todos){
+        if (item.done == true){
+          usecase.updateTodo(item.copyWith(isDeleted: true));
+        }
+      }
     }
 
     return FloatingActionButton(
