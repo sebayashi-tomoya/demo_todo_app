@@ -1,3 +1,4 @@
+import 'package:demo_todo_app/presentation/pages/date_picker_bottom_sheet.dart';
 import 'package:demo_todo_app/presentation/theme/app_colors.dart';
 import 'package:demo_todo_app/presentation/theme/app_size.dart';
 import 'package:demo_todo_app/presentation/widgets/add_close_button.dart';
@@ -21,7 +22,11 @@ class AddTodoBottomSheet extends StatelessWidget {
       child: const Center(
         child: Column(
           children: [
+            SizedBox(height: 10),
             InputTodoText(),
+            SizedBox(height: 10),
+            DatePickerBottomSheet(),
+            SizedBox(height: 10),
             AddCloseButton(),
           ],
         )

@@ -15,7 +15,7 @@ class AddTodoUsecase {
     final creator = TodoCreator(
       id: const Uuid().v4(),
       title: title,
-      executionDate: DateTime.now(),
+      executionDate: executionDate,
       done: false,
       isDeleted: false
     );

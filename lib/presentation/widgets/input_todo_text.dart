@@ -7,17 +7,18 @@ class InputTodoText extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final TextEditingController controller = TextEditingController();
-    void clearAll() {
-      controller.clear();
-    }
 
-    return TextField(
-      controller: controller,
-      onChanged: (value){
-        final notifier = ref.read(inputTextNotifierProvider.notifier);
-        notifier.updateState(value);
-      },
+    return SizedBox(
+      width: 300,
+      child: TextField(
+        decoration: const InputDecoration(
+          border: OutlineInputBorder(),
+        ),
+        onChanged: (value){
+          final notifier = ref.read(inputTextNotifierProvider.notifier);
+          notifier.updateState(value);
+        },
+      ),
     );
   }
 }
