@@ -1,5 +1,5 @@
 // ignore_for_file: file_names
-import 'package:demo_todo_app/presentation/pages/main_page.dart';
+import 'package:demo_todo_app/presentation/pages/main_page/main_page.dart';
 import 'package:demo_todo_app/presentation/theme/app_colors.dart';
 import 'package:flutter/material.dart';
 
