@@ -7,7 +7,7 @@ part of 'todo_groups_notifier.dart';
 // **************************************************************************
 
 String _$todoGroupsNotifierHash() =>
-    r'ac611be31c772af9278cc3e034895cf1eb84b7f3';
+    r'5c7c61915c80f1474b6cd636973f4e6af43f6c59';
 
 /// See also [TodoGroupsNotifier].
 @ProviderFor(TodoGroupsNotifier)

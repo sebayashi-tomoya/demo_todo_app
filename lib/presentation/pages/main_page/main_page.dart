@@ -1,11 +1,11 @@
 import 'package:demo_todo_app/application/state/tab_index_notifier.dart';
 import 'package:demo_todo_app/application/state/todo_groups_notifier.dart';
-import 'package:demo_todo_app/domain/types/todoGroup.dart';
 import 'package:demo_todo_app/presentation/pages/main_page/todo_list.dart';
 import 'package:demo_todo_app/presentation/pages/side_menu.dart';
 import 'package:demo_todo_app/presentation/widgets/add_button.dart';
 import 'package:demo_todo_app/presentation/widgets/colored_tab_bar.dart';
 import 'package:demo_todo_app/presentation/widgets/delete_button.dart';
+import 'package:demo_todo_app/presentation/widgets/group_tab.dart';
 import 'package:demo_todo_app/presentation/widgets/search_button.dart';
 import 'package:demo_todo_app/presentation/widgets/settings_button.dart';
 import 'package:demo_todo_app/presentation/widgets/todo_edit.dart';
@@ -25,16 +25,18 @@ class MainPage extends ConsumerWidget {
     // グループ
     final groups = ref.watch(todoGroupsNotifierProvider);
  
-    List<Tab> createTab(List<TodoGroup> groups){
-      var resultList = <Tab>[];
+    List<Widget> createTab(){
+      var resultList = <Widget>[];
       for (final item in groups){
-        resultList.add(Tab(text: item.name));
+        resultList.add(GroupTab(currentGroup: item));
       }
+      resultList.add(Tab(text: "+"));
       return resultList;
     }        
 
     return DefaultTabController(
-      length: groups.length,
+      // groupの数+”＋”ボタンのため+1
+      length: groups.length + 1,
       child: Scaffold(
           backgroundColor: AppColors.mainBackground,
         
@@ -53,9 +55,10 @@ class MainPage extends ConsumerWidget {
                 tabAlignment: TabAlignment.start,
                 isScrollable: true,
                 onTap: (index) {
-                  ref.read(tabIndexNotifierProvider.notifier).state = index;
+                  final tabIndexNotifier = ref.read(tabIndexNotifierProvider.notifier);
+                  tabIndexNotifier.updateState(index);
                 },
-                tabs: createTab(groups)
+                tabs: createTab()
               ),
             ),
           ),

@@ -13,7 +13,11 @@ final addTodoProvider = Provider<AddTodoUsecase>(
     final todosNotifier = ref.read(todosNotifierProvider.notifier);
     final groupsNotifier = ref.read(todoGroupsNotifierProvider.notifier);
     final tabIndexNotifier = ref.read(tabIndexNotifierProvider.notifier);
-    return AddTodoUsecase(todosNotifier: todosNotifier, groupsNotifier: groupsNotifier, tabIndexNotifier: tabIndexNotifier);
+    return AddTodoUsecase(
+      todosNotifier: todosNotifier,
+      groupsNotifier: groupsNotifier,
+      tabIndexNotifier: tabIndexNotifier
+    );
   }
 );
 
@@ -33,11 +37,14 @@ final addGroupProvider = Provider<AddGroupUsecase>(
   }
 );
 
-/// Get current groupId
+/// Get group id
 final getGroupIdProvider = Provider<GetGroupIdUsecase>(
   (ref) {
     final groupsNotifier = ref.read(todoGroupsNotifierProvider.notifier);
     final tabIndexNotifier = ref.read(tabIndexNotifierProvider.notifier);
-    return GetGroupIdUsecase(groupsNotifier: groupsNotifier, tabIndexNotifier: tabIndexNotifier);
+    return GetGroupIdUsecase(
+      groupsNotifier: groupsNotifier,
+      tabIndexNotifier: tabIndexNotifier,
+    );
   }
 );
