@@ -16,10 +16,17 @@ class GroupTab extends ConsumerWidget {
     final todos = ref.watch(todosNotifierProvider);  
 
     int getCount(){
+      final notDeletedList = todos
+        .where((e) => e.isDeleted == false)
+        .toList();
+      
       if (currentGroup.id == "GAll"){
-        return todos.length;
+        return notDeletedList.length;
       }
-      return todos.where((element) => element.groupId == currentGroup.id).length;
+      
+      return notDeletedList
+        .where((e) => e.groupId == currentGroup.id)
+        .length;
     }
 
     return Tab(
