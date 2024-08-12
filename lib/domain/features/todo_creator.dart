@@ -3,6 +3,7 @@ import 'package:demo_todo_app/domain/types/todoItem.dart';
 class TodoCreator {
   TodoCreator({
     required this.id,
+    required this.groupId,
     required this.title,
     required this.executionDate,
     required this.done,
@@ -10,6 +11,7 @@ class TodoCreator {
   });
 
   String id;
+  String groupId;
   String title;
   DateTime? executionDate;
   bool done;
@@ -19,6 +21,7 @@ class TodoCreator {
   TodoItem createNewTodo() {
     return TodoItem(
       id: id,
+      groupId: groupId,
       title: title,
       executionDate: executionDate,
       done: done,

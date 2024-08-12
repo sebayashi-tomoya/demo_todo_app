@@ -5,8 +5,10 @@ part 'todoItem.freezed.dart';
 @freezed
 class TodoItem with _$TodoItem {
   const factory TodoItem({
-    // ID
+    /// ID
     required String id,
+    /// 所属グループID
+    required String groupId,
     /// やること
     required String title,
     /// 実行日

@@ -15,6 +15,7 @@ class UpdateTodoUsecase {
     // ドメインを呼んでTodoを作成
     final creator = TodoCreator(
       id: newModel.id,
+      groupId: newModel.groupId,
       title: newModel.title,
       executionDate: newModel.executionDate,
       done: newModel.done,

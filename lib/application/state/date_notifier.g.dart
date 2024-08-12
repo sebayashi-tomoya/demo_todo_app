@@ -6,7 +6,7 @@ part of 'date_notifier.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$dateNotifierHash() => r'aff81b97db2de6026b50e567ebbc0362a8a9e2f0';
+String _$dateNotifierHash() => r'217bbbb98cec09949951b8c680a370615ea5602d';
 
 /// See also [DateNotifier].
 @ProviderFor(DateNotifier)

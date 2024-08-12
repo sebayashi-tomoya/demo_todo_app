@@ -1,4 +1,5 @@
 import 'package:demo_todo_app/domain/types/todoItem.dart';
+import 'package:demo_todo_app/mock_datas/todos_mock.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 part 'todos_notifier.g.dart';
 
@@ -7,22 +8,7 @@ class TodosNotifier extends _$TodosNotifier {
   @override
   List<TodoItem> build() {
     // 最初のデータ
-    return [
-      // TodoItem(todo: "旅行の計画を立てる", executionDate: DateTime.now(), done: false),
-      // TodoItem(todo: "英会話教室を検討", executionDate: DateTime.now(), done: false),
-      // TodoItem(todo: "友達とランチ", executionDate: DateTime.now(), done: false),
-      // TodoItem(todo: "ストレッチ", executionDate: DateTime.now(), done: false),
-      // TodoItem(todo: "読書", executionDate: DateTime.now(), done: false),
-      // TodoItem(todo: "服薬", executionDate: DateTime.now(), done: false),
-      // TodoItem(todo: "燃えるゴミの日", executionDate: DateTime.now(), done: false),
-      // TodoItem(todo: "旅行の計画を立てる", executionDate: DateTime.now(), done: false),
-      // TodoItem(todo: "英会話教室を検討", executionDate: DateTime.now(), done: false),
-      // TodoItem(todo: "友達とランチ", executionDate: DateTime.now(), done: false),
-      // TodoItem(todo: "ストレッチ", executionDate: DateTime.now(), done: false),
-      // TodoItem(todo: "読書", executionDate: DateTime.now(), done: false),
-      // TodoItem(todo: "服薬", executionDate: DateTime.now(), done: false),
-      // TodoItem(todo: "燃えるゴミの日", executionDate: DateTime.now(), done: false),
-    ];
+    return mockTodos;
   }
 
   /// Todoの追加
