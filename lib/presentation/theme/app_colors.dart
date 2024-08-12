@@ -6,4 +6,6 @@ class AppColors {
   static const mainBackground = Color.fromARGB(255, 231, 233, 234);
   static const green = Colors.green;
   static const white = Colors.white;
+  static const selectedTab = Colors.indigo;
+  static const noSelectedTab = Colors.black54;
 }
