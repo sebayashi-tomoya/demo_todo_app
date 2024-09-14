@@ -7,12 +7,12 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class GroupTab extends ConsumerWidget {
   final TodoGroup currentGroup;
-  final int index;
+  final int groupIndex;
 
   const GroupTab({
     super.key,
     required this.currentGroup,
-    required this.index
+    required this.groupIndex
   });
 
   @override
@@ -21,8 +21,9 @@ class GroupTab extends ConsumerWidget {
     final currentIndex = ref.watch(tabIndexNotifierProvider);
     // Todoのリスト
     final todos = ref.watch(todosNotifierProvider);
-    // 円の枠のカラー
-    final circleColor = currentIndex == index ? AppColors.selectedTab : AppColors.noSelectedTab; 
+    // 円の枠色
+    // 円のborderはTabBarのプロパティで設定できなかったので個別で設定
+    final circleColor = currentIndex == groupIndex ? AppColors.selectedTab : AppColors.noSelectedTab; 
 
     int getCount(){
       // 削除済みのTodoは除外

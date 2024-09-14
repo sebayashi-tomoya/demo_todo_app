@@ -6,7 +6,7 @@ part 'tab_index_notifier.g.dart';
 class TabIndexNotifier extends _$TabIndexNotifier{
   @override
   int build() {
-    // 最初のデータ
+    // 初期値は'すべて'
     return 0;
   }
 

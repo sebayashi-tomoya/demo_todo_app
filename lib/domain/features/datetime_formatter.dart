@@ -1,6 +1,7 @@
 
 import 'package:intl/intl.dart';
 
+/// DateTime型を扱うクラス
 class DatetimeFormatter {
   DatetimeFormatter() {
     today = DateTime.now();

@@ -5,9 +5,6 @@ part 'input_text_notifier.g.dart';
 class InputTextNotifier extends _$InputTextNotifier {
   @override
   String build() {
-    // データ破棄時は空欄に
-    ref.onDispose((){deleteAll();});
-
     // 最初のデータ
     return "";
   }
@@ -18,10 +15,5 @@ class InputTextNotifier extends _$InputTextNotifier {
     final newState = inputText;
     // データを上書き
     state = newState;
-  }
-
-  // 入力欄を空欄に
-  void deleteAll(){
-    state = "";
   }
 }
