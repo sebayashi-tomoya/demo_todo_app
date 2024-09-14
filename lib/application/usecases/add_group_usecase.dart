@@ -9,9 +9,8 @@ class AddGroupUsecase {
   
   final TodoGroupsNotifier groupsNotifier;
 
-  /// 新しいTodoをリストに追加する
-  Future<void> addNewTodo(String gruopName) async {
-    // ランダムでIDを生成
+  /// 新しいグループをリストに追加する
+  Future<void> addNewGroup(String gruopName) async {
     final id =  "G${const Uuid().v4()}";
     
     // ドメインを呼んで新しいグループを作成

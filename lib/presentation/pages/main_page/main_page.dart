@@ -1,5 +1,7 @@
 import 'package:demo_todo_app/application/state/tab_index_notifier.dart';
 import 'package:demo_todo_app/application/state/todo_groups_notifier.dart';
+import 'package:demo_todo_app/domain/types/todoGroup.dart';
+import 'package:demo_todo_app/presentation/pages/add_group_bottom_sheet.dart';
 import 'package:demo_todo_app/presentation/pages/main_page/todo_list.dart';
 import 'package:demo_todo_app/presentation/pages/side_menu.dart';
 import 'package:demo_todo_app/presentation/widgets/add_button.dart';
@@ -22,16 +24,50 @@ class MainPage extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     // 現在のタブインデックス
-    final currentIndex = ref.watch(tabIndexNotifierProvider);
+    final int currentIndex = ref.watch(tabIndexNotifierProvider);
     // グループ
-    final groups = ref.watch(todoGroupsNotifierProvider);
-    // タブのコントローラー（groupの数 ＋ ’＋’ボタンのため length+1） 
-    final tabController = useTabController(initialLength: groups.length + 1);
+    final List<TodoGroup> groups = ref.watch(todoGroupsNotifierProvider);
+    // TabControllerの長さを状態として管理（groupの数 ＋ ’＋’ボタンのため length+1）
+    final tabLength = useState(groups.length + 1);
+    // タブのコントローラー
+    TabController tabController = useTabController(initialLength: tabLength.value);
+    
+    /// ------------------------------------------------------
+    /// groups追加・削除時にtabLength更新 → TabConttoller新規作成
+    /// TabControllerとTabBarのlengthを合わせるため
+    /// ------------------------------------------------------
+
+    useEffect(() {
+      tabLength.value = groups.length + 1;
+
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        if (tabController.length != tabLength.value) {
+          // 最初のタブに移動
+          tabController.animateTo(0);
+        }
+      });
+
+      return null;
+    }, [groups]);
+
+    // TabControllerのlengthは再生成しないと変更できないため、tabLength変更時に再生成
+    useEffect(() {
+      tabController = TabController(
+        length: tabLength.value,
+        vsync: useSingleTickerProvider()
+      );
+
+      return tabController.dispose;
+    }, [tabLength.value]);
+
+    /// ------------------------------------------------------
+    
     // タブ変更時のイベント
     useEffect(() {
       tabController.addListener(() {
         ref.read(tabIndexNotifierProvider.notifier).updateState(tabController.index);
       });
+
       return null;
     }, [tabController]);
  
@@ -40,10 +76,22 @@ class MainPage extends HookConsumerWidget {
       for (int i = 0; i < groups.length; i++){
         resultList.add(GroupTab(
           currentGroup: groups[i],
-          index: i
+          groupIndex: i
         ));
       }
-      resultList.add(Tab(text: "+"));
+      resultList.add(
+        ElevatedButton(
+          onPressed: (){
+            showModalBottomSheet(
+              context: context,
+              builder: (BuildContext context){
+                return const AddGroupBottomSheet();
+              },
+            );
+          },
+          child: const Text("+")
+        )
+      );
       return resultList;
     }        
 

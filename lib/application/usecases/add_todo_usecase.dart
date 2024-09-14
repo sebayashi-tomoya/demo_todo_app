@@ -17,16 +17,14 @@ class AddTodoUsecase {
 
   /// 新しいTodoをリストに追加する
   Future<void> addNewTodo(String title, DateTime executionDate) async {
-    // ランダムでIDを生成
     final id =  "I${const Uuid().v4()}";
-    // 開いているタブのグループIDを取得
+    // グループのIDを取得するためにタブのインデックスを取得
     final currentTabIndex = tabIndexNotifier.getCurrentIndex();
-    final cuurentGroupId = groupsNotifier.getId(currentTabIndex);
 
     // ドメインを呼んで新しいTodoを作成
     final creator = TodoCreator(
       id: id,
-      groupId: cuurentGroupId,
+      groupId: groupsNotifier.getId(currentTabIndex),
       title: title,
       executionDate: executionDate,
       done: false,

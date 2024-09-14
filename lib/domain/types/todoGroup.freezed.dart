@@ -16,7 +16,7 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$TodoGroup {
-// ID
+  /// ID
   String get id => throw _privateConstructorUsedError;
 
   /// グループ名
@@ -137,7 +137,7 @@ class _$TodoGroupImpl implements _TodoGroup {
       required this.isDeleted,
       required this.updated});
 
-// ID
+  /// ID
   @override
   final String id;
 
@@ -187,7 +187,9 @@ abstract class _TodoGroup implements TodoGroup {
       required final bool isDeleted,
       required final DateTime updated}) = _$TodoGroupImpl;
 
-  @override // ID
+  @override
+
+  /// ID
   String get id;
   @override
 

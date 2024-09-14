@@ -5,7 +5,7 @@ part 'todoGroup.freezed.dart';
 @freezed
 class TodoGroup with _$TodoGroup {
   const factory TodoGroup({
-    // ID
+    /// ID
     required String id,
     /// グループ名
     required String name,
