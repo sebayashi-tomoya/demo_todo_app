@@ -51,10 +51,12 @@ class MainPage extends HookConsumerWidget {
     }, [groups]);
 
     // TabControllerのlengthは再生成しないと変更できないため、tabLength変更時に再生成
+    // TickerProviderはuseEffect外で呼び出さないとエラーになる
+    final tickerProvider = useSingleTickerProvider();
     useEffect(() {
       tabController = TabController(
         length: tabLength.value,
-        vsync: useSingleTickerProvider()
+        vsync: tickerProvider
       );
 
       return tabController.dispose;
