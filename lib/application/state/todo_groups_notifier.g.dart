@@ -1,26 +1,27 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'input_text_notifier.dart';
+part of 'todo_groups_notifier.dart';
 
 // **************************************************************************
 // RiverpodGenerator
 // **************************************************************************
 
-String _$inputTextNotifierHash() => r'8cda191f169e8b143bcbb758d6e2c233564db11a';
+String _$todoGroupsNotifierHash() =>
+    r'5c7c61915c80f1474b6cd636973f4e6af43f6c59';
 
-/// See also [InputTextNotifier].
-@ProviderFor(InputTextNotifier)
-final inputTextNotifierProvider =
-    AutoDisposeNotifierProvider<InputTextNotifier, String>.internal(
-  InputTextNotifier.new,
-  name: r'inputTextNotifierProvider',
+/// See also [TodoGroupsNotifier].
+@ProviderFor(TodoGroupsNotifier)
+final todoGroupsNotifierProvider =
+    AutoDisposeNotifierProvider<TodoGroupsNotifier, List<TodoGroup>>.internal(
+  TodoGroupsNotifier.new,
+  name: r'todoGroupsNotifierProvider',
   debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
       ? null
-      : _$inputTextNotifierHash,
+      : _$todoGroupsNotifierHash,
   dependencies: null,
   allTransitiveDependencies: null,
 );
 
-typedef _$InputTextNotifier = AutoDisposeNotifier<String>;
+typedef _$TodoGroupsNotifier = AutoDisposeNotifier<List<TodoGroup>>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member

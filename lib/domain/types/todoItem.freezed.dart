@@ -16,8 +16,11 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$TodoItem {
-// ID
+  /// ID
   String get id => throw _privateConstructorUsedError;
+
+  /// 所属グループID
+  String get groupId => throw _privateConstructorUsedError;
 
   /// やること
   String get title => throw _privateConstructorUsedError;
@@ -46,6 +49,7 @@ abstract class $TodoItemCopyWith<$Res> {
   @useResult
   $Res call(
       {String id,
+      String groupId,
       String title,
       DateTime? executionDate,
       bool done,
@@ -67,6 +71,7 @@ class _$TodoItemCopyWithImpl<$Res, $Val extends TodoItem>
   @override
   $Res call({
     Object? id = null,
+    Object? groupId = null,
     Object? title = null,
     Object? executionDate = freezed,
     Object? done = null,
@@ -77,6 +82,10 @@ class _$TodoItemCopyWithImpl<$Res, $Val extends TodoItem>
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
+              as String,
+      groupId: null == groupId
+          ? _value.groupId
+          : groupId // ignore: cast_nullable_to_non_nullable
               as String,
       title: null == title
           ? _value.title
@@ -112,6 +121,7 @@ abstract class _$$TodoItemImplCopyWith<$Res>
   @useResult
   $Res call(
       {String id,
+      String groupId,
       String title,
       DateTime? executionDate,
       bool done,
@@ -131,6 +141,7 @@ class __$$TodoItemImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? id = null,
+    Object? groupId = null,
     Object? title = null,
     Object? executionDate = freezed,
     Object? done = null,
@@ -141,6 +152,10 @@ class __$$TodoItemImplCopyWithImpl<$Res>
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
+              as String,
+      groupId: null == groupId
+          ? _value.groupId
+          : groupId // ignore: cast_nullable_to_non_nullable
               as String,
       title: null == title
           ? _value.title
@@ -171,15 +186,20 @@ class __$$TodoItemImplCopyWithImpl<$Res>
 class _$TodoItemImpl implements _TodoItem {
   const _$TodoItemImpl(
       {required this.id,
+      required this.groupId,
       required this.title,
       required this.executionDate,
       required this.done,
       required this.isDeleted,
       required this.updated});
 
-// ID
+  /// ID
   @override
   final String id;
+
+  /// 所属グループID
+  @override
+  final String groupId;
 
   /// やること
   @override
@@ -203,7 +223,7 @@ class _$TodoItemImpl implements _TodoItem {
 
   @override
   String toString() {
-    return 'TodoItem(id: $id, title: $title, executionDate: $executionDate, done: $done, isDeleted: $isDeleted, updated: $updated)';
+    return 'TodoItem(id: $id, groupId: $groupId, title: $title, executionDate: $executionDate, done: $done, isDeleted: $isDeleted, updated: $updated)';
   }
 
   @override
@@ -212,6 +232,7 @@ class _$TodoItemImpl implements _TodoItem {
         (other.runtimeType == runtimeType &&
             other is _$TodoItemImpl &&
             (identical(other.id, id) || other.id == id) &&
+            (identical(other.groupId, groupId) || other.groupId == groupId) &&
             (identical(other.title, title) || other.title == title) &&
             (identical(other.executionDate, executionDate) ||
                 other.executionDate == executionDate) &&
@@ -223,7 +244,7 @@ class _$TodoItemImpl implements _TodoItem {
 
   @override
   int get hashCode => Object.hash(
-      runtimeType, id, title, executionDate, done, isDeleted, updated);
+      runtimeType, id, groupId, title, executionDate, done, isDeleted, updated);
 
   @JsonKey(ignore: true)
   @override
@@ -235,14 +256,21 @@ class _$TodoItemImpl implements _TodoItem {
 abstract class _TodoItem implements TodoItem {
   const factory _TodoItem(
       {required final String id,
+      required final String groupId,
       required final String title,
       required final DateTime? executionDate,
       required final bool done,
       required final bool isDeleted,
       required final DateTime updated}) = _$TodoItemImpl;
 
-  @override // ID
+  @override
+
+  /// ID
   String get id;
+  @override
+
+  /// 所属グループID
+  String get groupId;
   @override
 
   /// やること
