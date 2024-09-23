@@ -13,9 +13,21 @@ import 'package:demo_todo_app/presentation/widgets/settings_button.dart';
 import 'package:demo_todo_app/presentation/widgets/todo_edit.dart';
 import 'package:demo_todo_app/presentation/widgets/todo_others.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../../theme/app_colors.dart';
+
+// SingleTickerProviderStateMixin の代わりに使用するクラス
+class _SingleTickerProvider extends TickerProvider {
+  late Ticker _ticker;
+
+  @override
+  Ticker createTicker(TickerCallback onTick) {
+    _ticker = Ticker(onTick);
+    return _ticker;
+  }
+}
 
 /// メイン画面
 class MainPage extends HookConsumerWidget {
@@ -29,8 +41,19 @@ class MainPage extends HookConsumerWidget {
     final List<TodoGroup> groups = ref.watch(todoGroupsNotifierProvider);
     // TabControllerの長さを状態として管理（groupの数 ＋ ’＋’ボタンのため length+1）
     final tabLength = useState(groups.length + 1);
+    // TickerProvider を作成
+    final tickerProvider = useMemoized(() => _SingleTickerProvider(), const []);
     // タブのコントローラー
-    TabController tabController = useTabController(initialLength: tabLength.value);
+    TabController tabController = useMemoized((){
+      return TabController(
+        length: tabLength.value,
+        vsync: tickerProvider,
+        initialIndex: currentIndex < tabLength.value ? currentIndex : 0,
+      );
+    },[tabLength.value]);
+
+    // TabController の破棄を確実に行う
+    useEffect(() => tabController.dispose, [tabController]);
     
     /// ------------------------------------------------------
     /// groups追加・削除時にtabLength更新 → TabConttoller新規作成
@@ -43,7 +66,7 @@ class MainPage extends HookConsumerWidget {
       WidgetsBinding.instance.addPostFrameCallback((_) {
         if (tabController.length != tabLength.value) {
           // 最初のタブに移動
-          tabController.animateTo(0);
+          tabController.index = currentIndex;
         }
       });
 
@@ -52,11 +75,11 @@ class MainPage extends HookConsumerWidget {
 
     // TabControllerのlengthは再生成しないと変更できないため、tabLength変更時に再生成
     // TickerProviderはuseEffect外で呼び出さないとエラーになる
-    final tickerProvider = useSingleTickerProvider();
     useEffect(() {
       tabController = TabController(
         length: tabLength.value,
-        vsync: tickerProvider
+        vsync: tickerProvider,
+        initialIndex: currentIndex < tabLength.value ? currentIndex : 0,
       );
 
       return tabController.dispose;
