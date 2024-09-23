@@ -11,8 +11,19 @@ class AddGroupBottomSheet extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    /// テキスト入力欄のコントローラー
+    final textController = useTextEditingController();
     /// テキスト入力欄
     final inputText = useState("");
+
+    // 入力欄を空にした後、ボタン内の文字を'閉じる'に変更するためにinputTextを更新
+    // AddCloseButtonを再ビルドする
+    useEffect(() {
+      textController.addListener(() {
+      inputText.value = textController.text;
+      });
+      return null;
+    }, [textController]);
 
     return Container(
       height: AppSize.bottomSheetHeight,
@@ -27,6 +38,7 @@ class AddGroupBottomSheet extends HookConsumerWidget {
         child: Column(
           children: [
             const SizedBox(height: 10),
+
             // テキスト入力欄
             SizedBox(
               width: 300,
@@ -34,9 +46,7 @@ class AddGroupBottomSheet extends HookConsumerWidget {
                 decoration: const InputDecoration(
                   border: OutlineInputBorder(),
                 ),
-                onChanged: (newValue){
-                  inputText.value = newValue;
-                },
+                controller: textController,
               ),
             ),
             const SizedBox(height: 10),
@@ -46,9 +56,9 @@ class AddGroupBottomSheet extends HookConsumerWidget {
               inputText: inputText.value,
               addEvent: () {
                 final usecase = ref.read(addGroupProvider);
-                usecase.addNewGroup(inputText.value);
+                usecase.addNewGroup(textController.text);
                 // 入力欄を空に
-                inputText.value = "";
+                textController.clear();
               },
             ),
           ],
