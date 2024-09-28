@@ -15,7 +15,7 @@ class AddCloseButton extends ConsumerWidget {
   });
 
   bool isEmptyText(String inputText) {
-    return inputText == "" ? true : false;
+    return inputText == "";
   }
 
   @override
