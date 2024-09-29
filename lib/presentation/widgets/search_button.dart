@@ -1,6 +1,4 @@
-// ignore_for_file: file_names
 import 'package:demo_todo_app/presentation/pages/search.dart';
-import 'package:demo_todo_app/presentation/theme/hero_tags.dart';
 import 'package:flutter/material.dart';
 
 class SearchButton extends StatelessWidget {
