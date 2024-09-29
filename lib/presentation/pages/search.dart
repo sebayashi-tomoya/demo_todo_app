@@ -18,14 +18,11 @@ class Search extends StatelessWidget {
           },
         ),
       ),
-      body: Column(
+      body: const Column(
         children: [
-          Hero(
-            tag: HeroTags.searchButton,
-            child: const Material(
-              color: Colors.transparent,
-              child: SearchBar(),
-            ),
+          Material(
+            color: Colors.transparent,
+            child: SearchBar(),
           ),
           // 他の検索関連のウィジェットをここに追加
         ],

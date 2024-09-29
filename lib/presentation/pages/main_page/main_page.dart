@@ -129,7 +129,7 @@ class MainPage extends HookConsumerWidget {
       appBar: AppBar(
         backgroundColor: AppColors.main,
         actions: const [
-          SerchButton(),
+          SearchButton(),
           SettingsButton(),
         ],
 
