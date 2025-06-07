@@ -1,5 +1,6 @@
 import 'package:demo_todo_app/presentation/pages/add_todo_bottom_sheet.dart';
 import 'package:demo_todo_app/presentation/theme/app_colors.dart';
+import 'package:demo_todo_app/presentation/theme/hero_tags.dart';
 import 'package:flutter/material.dart';
 
 class AddButton extends StatelessWidget {
@@ -9,6 +10,7 @@ class AddButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return FloatingActionButton(
       backgroundColor: AppColors.main,
+      heroTag: HeroTags.addButton,
 
       onPressed: () {
         showModalBottomSheet(

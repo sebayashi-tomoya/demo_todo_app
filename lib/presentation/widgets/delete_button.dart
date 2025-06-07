@@ -1,5 +1,6 @@
 import 'package:demo_todo_app/application/di/usecases.dart';
 import 'package:demo_todo_app/application/state/todos_notifier.dart';
+import 'package:demo_todo_app/presentation/theme/hero_tags.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../theme/app_colors.dart';
@@ -26,6 +27,7 @@ class DeleteButton extends ConsumerWidget {
     }
 
     return FloatingActionButton(
+      heroTag: HeroTags.deleteButton,
       onPressed: () {onPressed();},
       backgroundColor: AppColors.white,
       child: deleteIcon,

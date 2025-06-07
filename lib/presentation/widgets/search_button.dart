@@ -1,8 +1,8 @@
-// ignore_for_file: file_names
+import 'package:demo_todo_app/presentation/pages/search.dart';
 import 'package:flutter/material.dart';
 
-class SerchButton extends StatelessWidget {
-  const SerchButton({
+class SearchButton extends StatelessWidget {
+  const SearchButton({
     super.key,
   });
 
@@ -10,7 +10,12 @@ class SerchButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return IconButton(
       icon: const Icon(Icons.search),
-      onPressed: () {},
+      onPressed: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => const Search()),
+        );
+      },
     );
   }
 }
